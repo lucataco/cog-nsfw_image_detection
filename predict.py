@@ -26,6 +26,7 @@ class Predictor(BasePredictor):
     ) -> str:
         """Run a single prediction on the model"""
         img = Image.open(image)
+        img = img.convert("RGB") if img.mode == "RGBA" else img
        
         with torch.no_grad():
             inputs = self.processor(images=img, return_tensors="pt")
