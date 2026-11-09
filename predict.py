@@ -25,7 +25,7 @@ class Predictor(BasePredictor):
         image: Path = Input(description="Input image"),
     ) -> str:
         """Run a single prediction on the model"""
-        img = Image.open(image)
+        img = Image.open(image).convert("RGB")
        
         with torch.no_grad():
             inputs = self.processor(images=img, return_tensors="pt")
